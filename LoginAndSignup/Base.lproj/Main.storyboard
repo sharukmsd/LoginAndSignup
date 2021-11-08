@@ -100,7 +100,7 @@
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Ub6-hz-jjN" userLabel="height ≥ 40"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
                                                         <integer key="value" value="22"/>
@@ -183,7 +183,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="xaW-Cz-0Dq">
-                                <rect key="frame" x="52" y="87.5" width="270" height="493"/>
+                                <rect key="frame" x="52" y="39.5" width="270" height="589"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wux-9A-GCb">
                                         <rect key="frame" x="85" y="0.0" width="100" height="100"/>
@@ -205,7 +205,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cm5-5m-Rr0">
-                                        <rect key="frame" x="0.0" y="186" width="270" height="184"/>
+                                        <rect key="frame" x="0.0" y="186" width="270" height="280"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Rie-kk-6lb">
                                                 <rect key="frame" x="0.0" y="0.0" width="270" height="40"/>
@@ -257,7 +257,7 @@
                                                     <constraint firstAttribute="width" constant="270" id="Zd7-en-jxc"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
                                                         <integer key="value" value="22"/>
@@ -278,7 +278,7 @@
                                                     <constraint firstAttribute="width" constant="270" id="sEg-9m-DMw"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
                                                         <integer key="value" value="22"/>
@@ -286,15 +286,57 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password does not match" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUB-Se-S1J">
-                                                <rect key="frame" x="0.0" y="184" width="270" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="188" width="270" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <color key="textColor" red="0.98244174520000005" green="0.0" blue="0.027585070020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ph No: 03xxxxxxxxx" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Byt-8P-eAD">
+                                                <rect key="frame" x="0.0" y="192" width="270" height="40"/>
+                                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="DcP-K5-wil" userLabel="height ≥ 40"/>
+                                                    <constraint firstAttribute="width" constant="270" id="XE7-1A-GVq"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" textContentType="tel"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
+                                                        <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaH-ii-Q15">
+                                                <rect key="frame" x="0.0" y="236" width="270" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <color key="textColor" red="0.98244174520000005" green="0.0" blue="0.027585070020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date of Birth" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5xJ-FN-MF4">
+                                                <rect key="frame" x="0.0" y="240" width="270" height="40"/>
+                                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="270" id="DKc-Su-mcY"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="ycf-h3-6sz" userLabel="height ≥ 40"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
+                                                        <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tle-Ii-gZo">
+                                                <rect key="frame" x="0.0" y="280" width="270" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="md7-Ly-qVH">
-                                        <rect key="frame" x="99" y="395" width="72" height="40"/>
+                                        <rect key="frame" x="99" y="491" width="72" height="40"/>
                                         <color key="backgroundColor" red="0.01025875853" green="0.58971299070000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="gGQ-Xz-P1E"/>
@@ -309,7 +351,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyo-KC-dZZ">
-                                        <rect key="frame" x="50" y="460" width="170.5" height="33"/>
+                                        <rect key="frame" x="50" y="556" width="170.5" height="33"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already a user? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j47-Cb-z0S">
                                                 <rect key="frame" x="0.0" y="0.0" width="122.5" height="33"/>
@@ -340,6 +382,8 @@
                         <viewLayoutGuide key="safeArea" id="Nid-wl-gGO"/>
                     </view>
                     <connections>
+                        <outlet property="dateErrLabel" destination="tle-Ii-gZo" id="Is5-MG-3CO"/>
+                        <outlet property="dateTextField" destination="5xJ-FN-MF4" id="AJF-M0-9FO"/>
                         <outlet property="emailErrLabel" destination="5Sj-Pg-5sc" id="Zc8-F9-asJ"/>
                         <outlet property="emailTextField" destination="oyb-vG-nxL" id="ApT-1z-fxr"/>
                         <outlet property="fNameErrLabel" destination="dOu-2M-JTc" id="01g-6f-oDG"/>
@@ -347,6 +391,8 @@
                         <outlet property="goButton" destination="md7-Ly-qVH" id="rhT-wi-WNx"/>
                         <outlet property="passErrLabel" destination="CtB-Di-neB" id="bL4-Ke-Tca"/>
                         <outlet property="passwordTextField" destination="iXy-sR-awd" id="KMG-de-nV8"/>
+                        <outlet property="phoneErrLabel" destination="xaH-ii-Q15" id="z7V-zQ-9FU"/>
+                        <outlet property="phoneTextField" destination="Byt-8P-eAD" id="FXA-qx-8hP"/>
                         <outlet property="rPassErrLabel" destination="jUB-Se-S1J" id="Lhb-TE-7um"/>
                         <outlet property="rPasswordTextField" destination="wV9-d5-U64" id="v0o-Ig-kLB"/>
                     </connections>

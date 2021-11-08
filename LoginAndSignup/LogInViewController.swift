@@ -23,6 +23,9 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Hides the keyboard on Tap
+        initializeHideKeyboard()
+        
         //set radius
         emailTextField.layer.cornerRadius = CGFloat(radius)
         passwordTextField.layer.cornerRadius = CGFloat(radius)
@@ -36,7 +39,17 @@ class LogInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func initializeHideKeyboard() {
+        let Tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissMyKeyboard))
+        view.addGestureRecognizer(Tap)
+    }
+    
+    //obj func for Dismiss keyboard
+    @objc func dismissMyKeyboard(){
+        view.endEditing(true)
+    }
     @IBAction func enterTapped(_ sender: Any) {
         let email = emailTextField.text
         let password = passwordTextField.text
@@ -44,20 +57,36 @@ class LogInViewController: UIViewController {
         //Check if email is valid
         if (email?.isEmpty)!{
             emailErrLabel.isHidden = false
+            return;
         }
-        if((email?.contains("@"))!){
+        if(isValidEmail(email!)){
+            emailErrLabel.isHidden = true
+            
+        }else{
             emailErrLabel.isHidden = false
+            return
         }
         
         //Check if password is 8 char long
         if (password?.isEmpty)!{
             passErrLabel.isHidden = false
+            return;
         }
         
         
         //Validate credientals provided
+        let storedEmail = UserDefaults.standard.string(forKey: "email")
+        let storedPassword = UserDefaults.standard.string(forKey: "password")
         
         //If valid dismisses itself
+        if(email == storedEmail && password == storedPassword){
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            //To Do - Show error
+            passErrLabel.text = "Password is incorrect"
+            passErrLabel.isHidden = false
+            return
+        }
     }
     
     
@@ -67,6 +96,13 @@ class LogInViewController: UIViewController {
             emailErrLabel.isHidden = true
             passErrLabel.isHidden = true
         }
+    }
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
     }
     /*
     // MARK: - Navigation
