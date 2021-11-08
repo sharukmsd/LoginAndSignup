@@ -10,10 +10,10 @@ import UIKit
 
 class SignUpViewController: UIViewController {
 
-    @IBOutlet weak var fNameTextField: UITextField! //fullname textfield
+    @IBOutlet weak var fNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var rPasswordTextField: UITextField! //repeat password textfield
+    @IBOutlet weak var rPasswordTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var goButton: UIButton!
@@ -85,6 +85,7 @@ class SignUpViewController: UIViewController {
         dateTextField.text = dateFormatter.string(from: datePicker.date)
         view.endEditing(true)
     }
+    
     /*
     // MARK: - Navigation
 
