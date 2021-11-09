@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var fNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -29,6 +29,8 @@ class SignUpViewController: UIViewController {
     
     let radius = 22 //corner radius value for textfield and button
     private var datePicker: UIDatePicker!
+    var activeTextField : UITextField? = nil
+
     
     fileprivate func setUpDatePicker() {
         //Date Picker initialization
@@ -46,11 +48,28 @@ class SignUpViewController: UIViewController {
         goButton.layer.cornerRadius = CGFloat(radius)
     }
     
+    
+
+    //Delegates used for scrolling textField above keyboard
+    fileprivate func setDelegates() {
+        fNameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        rPasswordTextField.delegate = self
+        phoneTextField.delegate = self
+        dateTextField.delegate = self
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setDelegates()
+        
         //Hides the keyboard on Tap
         initializeHideKeyboard()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: Notification.Name.UIKeyboardWillHide, object: nil)
         
         //sets radius of input fiedls and button
         setRadius()
@@ -66,6 +85,39 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // Fired when user start typing in textField
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeTextField = textField
+        print("1")
+    }
+    // Fired when user end typing in textField
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.activeTextField = nil
+        dismissMyKeyboard()
+    }
+    
+    //When keybaord will appear
+    @objc func keyboardWillShow(notification: Notification) {
+        guard let userInfo = notification.userInfo else {return}
+        guard let keyboardSize = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else {return}
+        let keyboardFrame = keyboardSize.cgRectValue
+        if let activeTextField = activeTextField{
+            let bottomOfTextField = activeTextField.convert(activeTextField.bounds, to: self.view).maxY;
+            let topOfKeyboard = self.view.frame.height - keyboardFrame.height
+            
+            if bottomOfTextField > topOfKeyboard{
+                self.view.frame.origin.y -= keyboardFrame.height
+            }
+            
+        }
+    }
+    //When keybaord will disappear
+    @objc func keyboardWillHide(notification: Notification) {
+        if self.view.frame.origin.y != 0{
+            self.view.frame.origin.y = 0
+        }
+    }
+    
     //Hides the keyboard on Tap on screen anywhere
     func initializeHideKeyboard() {
         let Tap: UITapGestureRecognizer = UITapGestureRecognizer(
@@ -74,7 +126,7 @@ class SignUpViewController: UIViewController {
         view.addGestureRecognizer(Tap)
     }
     
-    //obj func for Dismiss keyboard
+    //func for Dismissing keyboard
     @objc func dismissMyKeyboard(){
         view.endEditing(true)
     }
@@ -192,3 +244,4 @@ class SignUpViewController: UIViewController {
     
 
 }
+
