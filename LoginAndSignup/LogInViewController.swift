@@ -76,11 +76,20 @@ class LogInViewController: UIViewController {
         
         //Validate credientals provided
         let storedEmail = UserDefaults.standard.string(forKey: "email")
-        let storedPassword = UserDefaults.standard.string(forKey: "password")
+        let storedPassword = UserDefaults.standard.string(forKey: "passWord")
         
-        //If valid dismisses itself
+//        print(storedEmail! + " " + email! ?? nil)
+//        print(storedPassword! + " " + password! ?? nil)
+        
         if(email == storedEmail && password == storedPassword){
+            
+            //Store on local file that this user is logged in
+            UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+            UserDefaults.standard.synchronize()
+            
+            // dismisses itself
             self.dismiss(animated: true, completion: nil)
+            
         }else{
             //To Do - Show error
             passErrLabel.text = "Password is incorrect"

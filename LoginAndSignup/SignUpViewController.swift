@@ -174,9 +174,10 @@ class SignUpViewController: UIViewController {
     //Stores data in UserDefaults
     func storeData(fName:String, email:String, password:String) -> Bool {
         UserDefaults.standard.set(fName, forKey: "fullName")
-//        print(UserDefaults.standard.string(forKey: "fullName") ?? "name")
         UserDefaults.standard.set(email, forKey: "email")
         UserDefaults.standard.set(password, forKey: "passWord")
+//        print(UserDefaults.standard.string(forKey: "passWord") ?? "pass")
+
         UserDefaults.standard.synchronize();
         return true;
     }

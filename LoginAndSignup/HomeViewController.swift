@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +20,21 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     override func viewDidAppear(_ animated: Bool) {
+        let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+        print(isUserLoggedIn)
+        if(!isUserLoggedIn){
+            self.performSegue(withIdentifier: "loginView", sender: self)
+        }
+    }
+    
+    @IBAction func logoutBtnTapped(_ sender: Any) {
+        //set key to false
+        UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
+        UserDefaults.standard.synchronize()
+        
+        // present the login screen
         self.performSegue(withIdentifier: "loginView", sender: self)
     }
-
+    
 }
 
