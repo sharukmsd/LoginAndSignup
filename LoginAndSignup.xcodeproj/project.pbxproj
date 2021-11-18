@@ -14,6 +14,9 @@
 		2E98B52227384F73006A9ADC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E98B52027384F73006A9ADC /* Main.storyboard */; };
 		2E98B52427384F73006A9ADC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E98B52327384F73006A9ADC /* Assets.xcassets */; };
 		2E98B52727384F73006A9ADC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E98B52527384F73006A9ADC /* LaunchScreen.storyboard */; };
+		2ED3B63627465869007E5CAA /* AuthModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2ED3B63427465869007E5CAA /* AuthModel.xcdatamodeld */; };
+		2ED3B63927465DC1007E5CAA /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED3B63727465DC1007E5CAA /* Person+CoreDataClass.swift */; };
+		2ED3B63A27465DC1007E5CAA /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED3B63827465DC1007E5CAA /* Person+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		2E98B52327384F73006A9ADC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E98B52627384F73006A9ADC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E98B52827384F73006A9ADC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2ED3B63527465869007E5CAA /* AuthModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AuthModel.xcdatamodel; sourceTree = "<group>"; };
+		2ED3B63727465DC1007E5CAA /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2ED3B63827465DC1007E5CAA /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,9 @@
 		2E98B51B27384F73006A9ADC /* LoginAndSignup */ = {
 			isa = PBXGroup;
 			children = (
+				2ED3B63727465DC1007E5CAA /* Person+CoreDataClass.swift */,
+				2ED3B63827465DC1007E5CAA /* Person+CoreDataProperties.swift */,
+				2EF24FCB2746344B00F03F53 /* Person */,
 				2E98B51C27384F73006A9ADC /* AppDelegate.swift */,
 				2E98B51E27384F73006A9ADC /* HomeViewController.swift */,
 				2E98B52027384F73006A9ADC /* Main.storyboard */,
@@ -66,8 +75,16 @@
 				2E98B52827384F73006A9ADC /* Info.plist */,
 				2E15F10E27386FF3009ECFBC /* SignUpViewController.swift */,
 				2E15F1102738730E009ECFBC /* LogInViewController.swift */,
+				2ED3B63427465869007E5CAA /* AuthModel.xcdatamodeld */,
 			);
 			path = LoginAndSignup;
+			sourceTree = "<group>";
+		};
+		2EF24FCB2746344B00F03F53 /* Person */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Person;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,8 +159,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ED3B63A27465DC1007E5CAA /* Person+CoreDataProperties.swift in Sources */,
 				2E15F1112738730E009ECFBC /* LogInViewController.swift in Sources */,
 				2E15F10F27386FF3009ECFBC /* SignUpViewController.swift in Sources */,
+				2ED3B63927465DC1007E5CAA /* Person+CoreDataClass.swift in Sources */,
+				2ED3B63627465869007E5CAA /* AuthModel.xcdatamodeld in Sources */,
 				2E98B51F27384F73006A9ADC /* HomeViewController.swift in Sources */,
 				2E98B51D27384F73006A9ADC /* AppDelegate.swift in Sources */,
 			);
@@ -328,6 +348,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2ED3B63427465869007E5CAA /* AuthModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2ED3B63527465869007E5CAA /* AuthModel.xcdatamodel */,
+			);
+			currentVersion = 2ED3B63527465869007E5CAA /* AuthModel.xcdatamodel */;
+			path = AuthModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2E98B51127384F73006A9ADC /* Project object */;
 }

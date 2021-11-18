@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 
@@ -31,6 +32,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     private var datePicker: UIDatePicker!
     var activeTextField : UITextField? = nil
 
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     fileprivate func setUpDatePicker() {
         //Date Picker initialization
@@ -88,7 +90,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     // Fired when user start typing in textField
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextField = textField
-        print("1")
+//        print("1")
     }
     // Fired when user end typing in textField
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -155,7 +157,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let password = passwordTextField.text
         let rPassword = rPasswordTextField.text
         let phone = phoneTextField.text
-        let dateOfBirth = dateTextField.text
+        let dateOfBirth = datePicker.date
         
         //Check for empty fields
         if (fullName?.isEmpty)!{
@@ -180,7 +182,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             phoneErrLabel.isHidden = false
             return;
         }
-        if (dateOfBirth?.isEmpty)!{
+        if (dateTextField.text?.isEmpty)!{
             dateErrLabel.isHidden = false
             return;
         }
@@ -210,7 +212,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         }
         
         //Store data
-        let isStored = storeData(fName: fullName!, email: email!, password: password!)
+        let isStored = storeData(fName: fullName!, email: email!, password: password!, phone: phone!, dateOfBirth: dateOfBirth)
         if isStored{
             self.dismiss(animated: true, completion: nil)
         }
@@ -223,15 +225,33 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    //Stores data in UserDefaults
-    func storeData(fName:String, email:String, password:String) -> Bool {
-        UserDefaults.standard.set(fName, forKey: "fullName")
-        UserDefaults.standard.set(email, forKey: "email")
-        UserDefaults.standard.set(password, forKey: "passWord")
-//        print(UserDefaults.standard.string(forKey: "passWord") ?? "pass")
+    //Stores data with Core Data
+    func storeData(fName:String, email:String, password:String, phone: String, dateOfBirth: Date) -> Bool {
+        
+        let newPerson = Person(context: context)
+        
+        newPerson.fullName = fName
+        newPerson.email = email
+        newPerson.password = password
+        newPerson.phone = phone
+        newPerson.dateOfBirth = dateOfBirth as NSDate
+        
+        do{
+            try context.save()
+            print ("Saved")
+            return true;
+        }catch let error as NSError{
+            print ("Could Not Save \(error)")
+            return false
+        }
+        
 
-        UserDefaults.standard.synchronize();
-        return true;
+//        UserDefaults.standard.set(fName, forKey: "fullName")
+//        UserDefaults.standard.set(email, forKey: "email")
+//        UserDefaults.standard.set(password, forKey: "passWord")
+////        print(UserDefaults.standard.string(forKey: "passWord") ?? "pass")
+//
+//        UserDefaults.standard.synchronize();
     }
     
     //Validates email for regular expression

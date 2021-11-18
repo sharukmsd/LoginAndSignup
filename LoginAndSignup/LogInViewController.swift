@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class LogInViewController: UIViewController {
 
@@ -17,6 +18,7 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var emailErrLabel: UILabel!
     @IBOutlet weak var passErrLabel: UILabel!
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     //radius for textfields and button
     let radius = 22
 
@@ -75,13 +77,13 @@ class LogInViewController: UIViewController {
         
         
         //Validate credientals provided
-        let storedEmail = UserDefaults.standard.string(forKey: "email")
-        let storedPassword = UserDefaults.standard.string(forKey: "passWord")
-        
+//        let storedEmail = UserDefaults.standard.string(forKey: "email")
+//        let storedPassword = UserDefaults.standard.string(forKey: "passWord")
+//
 //        print(storedEmail! + " " + email! ?? nil)
 //        print(storedPassword! + " " + password! ?? nil)
         
-        if(email == storedEmail && password == storedPassword){
+        if(isUser(email: email!, password: password!)){
             
             //Store on local file that this user is logged in
             UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
@@ -112,6 +114,24 @@ class LogInViewController: UIViewController {
         
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
+    }
+    
+    func isUser(email: String, password: String) -> Bool {
+        
+        do {
+            let res = try context.fetch(Person.fetchRequest())
+            for person in res as! [NSManagedObject]{
+                print(person.value(forKey: "fullName") as! String)
+                print(person.value(forKey: "email") as! String)
+                print(person.value(forKey: "password") as! String)
+                print(person.value(forKey: "phone") as! String)
+                print(person.value(forKey: "dateOfBirth") as! Date)
+            }
+            return true
+        } catch {
+            print("Could not auth")
+            return false
+        }
     }
     /*
     // MARK: - Navigation
