@@ -87,6 +87,7 @@ class LogInViewController: UIViewController {
             
             //Store on local file that this user is logged in
             UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+            UserDefaults.standard.set(email!, forKey: "loggedInUserEmail")
             UserDefaults.standard.synchronize()
             
             // dismisses itself

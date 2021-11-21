@@ -194,6 +194,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             emailErrLabel.isHidden = false
             return;
         }
+        if(isEmailExistAlready(email: email!)){
+            emailErrLabel.isHidden = false
+            return
+        }else{
+            emailErrLabel.isHidden = true
+        }
         
         //Passwod must be 8 character long
         if let password = passwordTextField.text, password.count >= 8{
@@ -261,7 +267,23 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
-    
+    //Checks if email already exist in CoreData
+    func isEmailExistAlready(email: String) -> Bool {
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Person")
+        fetchRequest.predicate = NSPredicate(format: "email = %@", email)
+        
+        var results: [NSManagedObject] = []
+        
+        do {
+            results = try context.fetch(fetchRequest)
+        }
+        catch {
+            print("error executing fetch request: \(error)")
+        }
+        
+        return results.count > 0
+    }
 
 }
 
