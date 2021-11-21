@@ -75,7 +75,26 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.textLabel?.text = person.fullName
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let updateVC = storyboard?.instantiateViewController(withIdentifier: "UpdateViewController") as! UpdateViewController
+        updateVC.person = fetchedResultsController.object(at: indexPath)
+        self.navigationController?.pushViewController(updateVC, animated: true)
+    }
+    //deletes cell from table and related data from database
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleted")
+            
+            context.delete(fetchedResultsController.object(at: indexPath))
+            do{
+                try context.save()
+//                myTableView.deleteRows(at: [indexPath], with: .fade)
+            }catch{
+                print("Error: Could not delete")
+            }
+            
+        }
+    }
     
     @IBAction func logoutBtnTapped(_ sender: Any) {
         //set key to false
