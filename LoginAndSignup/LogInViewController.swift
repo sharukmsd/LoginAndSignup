@@ -108,6 +108,11 @@ class LogInViewController: UIViewController {
             emailErrLabel.isHidden = true
             passErrLabel.isHidden = true
         }
+        
+        //Set fields empty
+        emailTextField.text = ""
+        passwordTextField.text = ""
+        
     }
     
     func isValidEmail(_ email: String) -> Bool {
@@ -118,21 +123,25 @@ class LogInViewController: UIViewController {
     }
     
     func isUser(email: String, password: String) -> Bool {
-        
+        var isUserFlag = false
         do {
             let res = try context.fetch(Person.fetchRequest())
             for person in res as! [NSManagedObject]{
+                if(email == person.value(forKey: "email") as! String && password == person.value(forKey: "password") as! String){
+                    isUserFlag = true
+                    break
+                }
+                
                 print(person.value(forKey: "fullName") as! String)
                 print(person.value(forKey: "email") as! String)
                 print(person.value(forKey: "password") as! String)
                 print(person.value(forKey: "phone") as! String)
                 print(person.value(forKey: "dateOfBirth") as! Date)
             }
-            return true
         } catch {
             print("Could not auth")
-            return false
         }
+        return isUserFlag
     }
     /*
     // MARK: - Navigation

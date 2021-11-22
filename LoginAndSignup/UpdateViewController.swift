@@ -18,10 +18,17 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var txtDateOfBirth: UITextField!
     @IBOutlet weak var btnUpdate: UIButton!
     
+    @IBOutlet weak var fNameErrLabel: UILabel!
+    @IBOutlet weak var emailErrLabel: UILabel!
+    @IBOutlet weak var passErrLabel: UILabel!
+    @IBOutlet weak var phoneErrLabel: UILabel!
+    @IBOutlet weak var dateErrLabel: UILabel!
+    
     var activeTextField : UITextField? = nil
     private var datePicker: UIDatePicker!
     var person: Person?
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let validationManager = ValidationManager()
 
     fileprivate func setDelegates() {
         txtFullName.delegate = self
@@ -123,11 +130,56 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func updateTapped(_ sender: Any) {
-        person?.fullName = txtFullName.text
-        person?.email = txtEmail.text
-        person?.password = txtPassword.text
-        person?.phone = txtPhone.text
-        person?.dateOfBirth = datePicker.date as NSDate
+        let fullName = txtFullName.text
+        let email = txtEmail.text
+        let password = txtPassword.text
+        let phone = txtPhone.text
+        let dateOfBirth = datePicker.date as NSDate
+        
+        //Validations
+        if (validationManager.isValidName(name: fullName!)){
+            fNameErrLabel.isHidden = true
+        }else{
+            fNameErrLabel.isHidden = false
+            return;
+        }
+        
+        //Check if email is valid
+        if(validationManager.isValidEmail(email: email!)){
+            emailErrLabel.isHidden = true
+        }else{
+            emailErrLabel.text = "Please enter a valid email"
+            emailErrLabel.isHidden = false
+            return;
+        }
+        
+        //Passwod must be 8 character long
+        if(validationManager.isValidPassword(password: password!)){
+            passErrLabel.isHidden = true
+        }else{
+            passErrLabel.isHidden = false
+            return;
+        }
+        
+        if !(validationManager.isValidPhoneNumber(phone: phone!)){
+            phoneErrLabel.isHidden = false
+            return;
+        }else{
+            phoneErrLabel.isHidden = true
+        }
+        if (validationManager.isValidDate(date: txtDateOfBirth.text!)){
+            dateErrLabel.isHidden = true
+        }else{
+            dateErrLabel.isHidden = false
+            return;
+        }
+        
+        
+        person?.fullName = fullName
+        person?.email = email
+        person?.password = password
+        person?.phone = phone
+        person?.dateOfBirth = dateOfBirth
         
         do {
             try context.save()
@@ -138,14 +190,5 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

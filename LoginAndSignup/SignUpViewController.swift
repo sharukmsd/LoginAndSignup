@@ -28,9 +28,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var dateErrLabel: UILabel!
     
     
-    let radius = 22 //corner radius value for textfield and button
     private var datePicker: UIDatePicker!
     var activeTextField : UITextField? = nil
+    
+    let validationManager = ValidationManager()
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -42,13 +43,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         dateTextField.inputView = datePicker
     }
     
-    fileprivate func setRadius() {
-        fNameTextField.layer.cornerRadius = CGFloat(radius)
-        emailTextField.layer.cornerRadius = CGFloat(radius)
-        passwordTextField.layer.cornerRadius = CGFloat(radius)
-        rPasswordTextField.layer.cornerRadius = CGFloat(radius)
-        goButton.layer.cornerRadius = CGFloat(radius)
-    }
+    
     
     
 
@@ -90,7 +85,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     // Fired when user start typing in textField
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextField = textField
-//        print("1")
     }
     // Fired when user end typing in textField
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -159,42 +153,24 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let phone = phoneTextField.text
         let dateOfBirth = datePicker.date
         
-        //Check for empty fields
-        if (fullName?.isEmpty)!{
-            fNameErrLabel.isHidden = false
-            return;
-        }else{
+        //Validations
+        if (validationManager.isValidName(name: fullName!)){
             fNameErrLabel.isHidden = true
-        }
-        if (email?.isEmpty)!{
-            emailErrLabel.isHidden = false
-            return;
-        }
-        if (password?.isEmpty)!{
-            passErrLabel.isHidden = false
-            return;
-        }
-        if (rPassword?.isEmpty)!{
-            rPassErrLabel.isHidden = false
-            return;
-        }
-        if (phone?.isEmpty)!{
-            phoneErrLabel.isHidden = false
-            return;
-        }
-        if (dateTextField.text?.isEmpty)!{
-            dateErrLabel.isHidden = false
+        }else{
+            fNameErrLabel.isHidden = false
             return;
         }
         
         //Check if email is valid
-        if(isValidEmail(email!)){
+        if(validationManager.isValidEmail(email: email!)){
             emailErrLabel.isHidden = true
         }else{
+            emailErrLabel.text = "Please enter a valid email"
             emailErrLabel.isHidden = false
             return;
         }
         if(isEmailExistAlready(email: email!)){
+            emailErrLabel.text = "Email already exist, Please Login"
             emailErrLabel.isHidden = false
             return
         }else{
@@ -202,7 +178,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         }
         
         //Passwod must be 8 character long
-        if let password = passwordTextField.text, password.count >= 8{
+        if(validationManager.isValidPassword(password: password!)){
             passErrLabel.isHidden = true
         }else{
             passErrLabel.isHidden = false
@@ -217,6 +193,20 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             rPassErrLabel.isHidden = true
         }
         
+        if !(validationManager.isValidPhoneNumber(phone: phone!)){
+            phoneErrLabel.isHidden = false
+            return;
+        }else{
+            phoneErrLabel.isHidden = true
+        }
+        if (validationManager.isValidDate(date: dateTextField.text!)){
+            dateErrLabel.isHidden = true
+        }else{
+            dateErrLabel.isHidden = false
+            return;
+        }
+        
+
         //Store data
         let isStored = storeData(fName: fullName!, email: email!, password: password!, phone: phone!, dateOfBirth: dateOfBirth)
         if isStored{
@@ -260,13 +250,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 //        UserDefaults.standard.synchronize();
     }
     
-    //Validates email for regular expression
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
+    
     //Checks if email already exist in CoreData
     func isEmailExistAlready(email: String) -> Bool {
         
@@ -284,6 +268,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         return results.count > 0
     }
-
+    
+    fileprivate func setRadius() {
+        let radius = 22 //corner radius value for textfield and button
+        
+        fNameTextField.layer.cornerRadius = CGFloat(radius)
+        emailTextField.layer.cornerRadius = CGFloat(radius)
+        passwordTextField.layer.cornerRadius = CGFloat(radius)
+        rPasswordTextField.layer.cornerRadius = CGFloat(radius)
+        phoneTextField.layer.cornerRadius = CGFloat(radius)
+        dateTextField.layer.cornerRadius = CGFloat(radius)
+        goButton.layer.cornerRadius = CGFloat(radius)
+    }
 }
 
