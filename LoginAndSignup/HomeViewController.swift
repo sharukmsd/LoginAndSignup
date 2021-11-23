@@ -13,6 +13,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var lblName: UILabel!
+    @IBOutlet weak var btnLogout: UIButton!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var fetchedResultsController: NSFetchedResultsController<Person>!
 
@@ -23,6 +24,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         myTableView.dataSource = self
         myTableView.delegate = self
         
+        btnLogout.layer.cornerRadius = CGFloat(7.5)
+
 //        lblName.text = UserDefaults.standard.string(forKey: "loggedInUserEmail")
 
         // Do any additional setup after loading the view, typically from a nib.
@@ -124,7 +127,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                     self.myTableView.reloadData()
         },
                                   completion: nil);
-
     }
 }
 

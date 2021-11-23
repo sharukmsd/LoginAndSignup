@@ -42,10 +42,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         datePicker?.addTarget(self, action: #selector(dateChanged(datePicker:)), for: .valueChanged)
         dateTextField.inputView = datePicker
     }
-    
-    
-    
-    
 
     //Delegates used for scrolling textField above keyboard
     fileprivate func setDelegates() {
@@ -131,7 +127,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         dateTextField.text = dateFormatter.string(from: datePicker.date)
-        view.endEditing(true)
+//        view.endEditing(true)
     }
     
     /*

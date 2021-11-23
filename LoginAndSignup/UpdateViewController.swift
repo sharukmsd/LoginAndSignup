@@ -48,6 +48,8 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        btnUpdate.layer.cornerRadius = CGFloat(7.5)
+
         initializeHideKeyboard()
         
         setDelegates()
@@ -190,5 +192,5 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
-
+    
 }

@@ -132,11 +132,6 @@ class LogInViewController: UIViewController {
                     break
                 }
                 
-                print(person.value(forKey: "fullName") as! String)
-                print(person.value(forKey: "email") as! String)
-                print(person.value(forKey: "password") as! String)
-                print(person.value(forKey: "phone") as! String)
-                print(person.value(forKey: "dateOfBirth") as! Date)
             }
         } catch {
             print("Could not auth")
