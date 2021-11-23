@@ -33,7 +33,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     let validationManager = ValidationManager()
 
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let dbManager = DatabaseManager()
     
     fileprivate func setUpDatePicker() {
         //Date Picker initialization
@@ -130,15 +130,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 //        view.endEditing(true)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     @IBAction func goTapped(_ sender: Any) {
         //on tapping the Go button
@@ -165,7 +156,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             emailErrLabel.isHidden = false
             return;
         }
-        if(isEmailExistAlready(email: email!)){
+        if(validationManager.isEmailExistAlready(email: email!)){
             emailErrLabel.text = "Email already exist, Please Login"
             emailErrLabel.isHidden = false
             return
@@ -204,7 +195,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
 
         //Store data
-        let isStored = storeData(fName: fullName!, email: email!, password: password!, phone: phone!, dateOfBirth: dateOfBirth)
+        let isStored = dbManager.createNewUser(fName: fullName!, email: email!, password: password!, phone: phone!, dateOfBirth: dateOfBirth)
         if isStored{
             self.dismiss(animated: true, completion: nil)
         }
@@ -215,54 +206,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         //On tapping the login
         // Dissmiss itself
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    //Stores data with Core Data
-    func storeData(fName:String, email:String, password:String, phone: String, dateOfBirth: Date) -> Bool {
-        
-        let newPerson = Person(context: context)
-        
-        newPerson.fullName = fName
-        newPerson.email = email
-        newPerson.password = password
-        newPerson.phone = phone
-        newPerson.dateOfBirth = dateOfBirth as NSDate
-        
-        do{
-            try context.save()
-            print ("Saved")
-            return true;
-        }catch let error as NSError{
-            print ("Could Not Save \(error)")
-            return false
-        }
-        
-
-//        UserDefaults.standard.set(fName, forKey: "fullName")
-//        UserDefaults.standard.set(email, forKey: "email")
-//        UserDefaults.standard.set(password, forKey: "passWord")
-////        print(UserDefaults.standard.string(forKey: "passWord") ?? "pass")
-//
-//        UserDefaults.standard.synchronize();
-    }
-    
-    
-    //Checks if email already exist in CoreData
-    func isEmailExistAlready(email: String) -> Bool {
-        
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Person")
-        fetchRequest.predicate = NSPredicate(format: "email = %@", email)
-        
-        var results: [NSManagedObject] = []
-        
-        do {
-            results = try context.fetch(fetchRequest)
-        }
-        catch {
-            print("error executing fetch request: \(error)")
-        }
-        
-        return results.count > 0
     }
     
     fileprivate func setRadius() {

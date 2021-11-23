@@ -15,6 +15,8 @@
 		2E98B52227384F73006A9ADC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E98B52027384F73006A9ADC /* Main.storyboard */; };
 		2E98B52427384F73006A9ADC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E98B52327384F73006A9ADC /* Assets.xcassets */; };
 		2E98B52727384F73006A9ADC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E98B52527384F73006A9ADC /* LaunchScreen.storyboard */; };
+		2E9FC492274D18B2007FE268 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9FC491274D18B2007FE268 /* ForgetPasswordViewController.swift */; };
+		2E9FC494274D6A8E007FE268 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9FC493274D6A8E007FE268 /* DatabaseManager.swift */; };
 		2ED3B63627465869007E5CAA /* AuthModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2ED3B63427465869007E5CAA /* AuthModel.xcdatamodeld */; };
 		2ED3B63927465DC1007E5CAA /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED3B63727465DC1007E5CAA /* Person+CoreDataClass.swift */; };
 		2ED3B63A27465DC1007E5CAA /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED3B63827465DC1007E5CAA /* Person+CoreDataProperties.swift */; };
@@ -32,6 +34,8 @@
 		2E98B52327384F73006A9ADC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E98B52627384F73006A9ADC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E98B52827384F73006A9ADC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E9FC491274D18B2007FE268 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
+		2E9FC493274D6A8E007FE268 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		2ED3B63527465869007E5CAA /* AuthModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AuthModel.xcdatamodel; sourceTree = "<group>"; };
 		2ED3B63727465DC1007E5CAA /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2ED3B63827465DC1007E5CAA /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -74,9 +78,11 @@
 				2E98B51C27384F73006A9ADC /* AppDelegate.swift */,
 				2E98B51E27384F73006A9ADC /* HomeViewController.swift */,
 				2E15F10E27386FF3009ECFBC /* SignUpViewController.swift */,
-				2EE74742274B885D00C21C43 /* ValidationManager.swift */,
 				2E15F1102738730E009ECFBC /* LogInViewController.swift */,
 				2E3EFFA2274A713800C65E36 /* UpdateViewController.swift */,
+				2E9FC491274D18B2007FE268 /* ForgetPasswordViewController.swift */,
+				2EE74742274B885D00C21C43 /* ValidationManager.swift */,
+				2E9FC493274D6A8E007FE268 /* DatabaseManager.swift */,
 				2E98B52027384F73006A9ADC /* Main.storyboard */,
 				2E98B52327384F73006A9ADC /* Assets.xcassets */,
 				2E98B52527384F73006A9ADC /* LaunchScreen.storyboard */,
@@ -166,7 +172,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ED3B63A27465DC1007E5CAA /* Person+CoreDataProperties.swift in Sources */,
+				2E9FC494274D6A8E007FE268 /* DatabaseManager.swift in Sources */,
 				2E15F1112738730E009ECFBC /* LogInViewController.swift in Sources */,
+				2E9FC492274D18B2007FE268 /* ForgetPasswordViewController.swift in Sources */,
 				2E3EFFA3274A713800C65E36 /* UpdateViewController.swift in Sources */,
 				2EE74743274B885D00C21C43 /* ValidationManager.swift in Sources */,
 				2E15F10F27386FF3009ECFBC /* SignUpViewController.swift in Sources */,

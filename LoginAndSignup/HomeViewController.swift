@@ -14,7 +14,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var btnLogout: UIButton!
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let dbManager = DatabaseManager()
+
     var fetchedResultsController: NSFetchedResultsController<Person>!
 
     
@@ -27,7 +29,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         btnLogout.layer.cornerRadius = CGFloat(7.5)
 
 //        lblName.text = UserDefaults.standard.string(forKey: "loggedInUserEmail")
-
+//        lblName.isHidden = false
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -38,18 +40,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //Load data into table view with the help of NSFetchedResultsController
     fileprivate func loadTableFromCoreData() {
-        let fetchRequest: NSFetchRequest<Person> = Person.fetchRequest()
-        fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "fullName", ascending: true)
-        ]
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        do {
-            try fetchedResultsController.performFetch()
-            
-        } catch {
-            print("Unable to fetch data")
-        }
+        fetchedResultsController = dbManager.getAllUsers()
         reloadTableView()
     }
     
@@ -96,15 +87,23 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //deletes cell from table and related data from database
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            print("Deleted")
             
-            context.delete(fetchedResultsController.object(at: indexPath))
-            do{
-                try context.save()
-            }catch{
-                print("Error: Could not delete")
-            }
-            loadTableFromCoreData()
+            let personToDelete = self.fetchedResultsController.object(at: indexPath)
+            let confirmDelete = UIAlertController(title: "Confirm deletion", message: "Do you really want to delete \(personToDelete.fullName!)?", preferredStyle: UIAlertControllerStyle.alert)
+            
+            confirmDelete.addAction(UIAlertAction(title: "Yes", style: .default, handler: {
+                (action: UIAlertAction!) in
+                
+                self.dbManager.deleteUser(userToDelete: personToDelete)
+                //reload table
+                self.loadTableFromCoreData()
+            }))
+            
+            confirmDelete.addAction(UIAlertAction(title: "No", style: .cancel, handler: {
+                (action: UIAlertAction!) in
+                
+            }))
+            present(confirmDelete, animated: true, completion: nil)
         }
     }
 

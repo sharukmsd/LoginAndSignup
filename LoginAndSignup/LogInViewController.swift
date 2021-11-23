@@ -18,7 +18,9 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var emailErrLabel: UILabel!
     @IBOutlet weak var passErrLabel: UILabel!
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let validationManager = ValidationManager()
+    let dbManager = DatabaseManager()
     //radius for textfields and button
     let radius = 22
 
@@ -57,31 +59,20 @@ class LogInViewController: UIViewController {
         let password = passwordTextField.text
         
         //Check if email is valid
-        if (email?.isEmpty)!{
-            emailErrLabel.isHidden = false
-            return;
-        }
-        if(isValidEmail(email!)){
+        if(validationManager.isValidEmail(email: email!)){
             emailErrLabel.isHidden = true
-            
         }else{
             emailErrLabel.isHidden = false
-            return
+            return;
         }
         
         //Check if password is 8 char long
-        if (password?.isEmpty)!{
+        if(validationManager.isValidPassword(password: password!)){
+            passErrLabel.isHidden = true
+        }else{
             passErrLabel.isHidden = false
             return;
         }
-        
-        
-        //Validate credientals provided
-//        let storedEmail = UserDefaults.standard.string(forKey: "email")
-//        let storedPassword = UserDefaults.standard.string(forKey: "passWord")
-//
-//        print(storedEmail! + " " + email! ?? nil)
-//        print(storedPassword! + " " + password! ?? nil)
         
         if(isUser(email: email!, password: password!)){
             
@@ -95,7 +86,7 @@ class LogInViewController: UIViewController {
             
         }else{
             //To Do - Show error
-            passErrLabel.text = "Password is incorrect"
+            passErrLabel.text = "No user with this email or password"
             passErrLabel.isHidden = false
             return
         }
@@ -112,40 +103,20 @@ class LogInViewController: UIViewController {
         //Set fields empty
         emailTextField.text = ""
         passwordTextField.text = ""
-        
-    }
-    
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
+//        self.dismiss(animated: true, completion: nil)
     }
     
     func isUser(email: String, password: String) -> Bool {
         var isUserFlag = false
-        do {
-            let res = try context.fetch(Person.fetchRequest())
-            for person in res as! [NSManagedObject]{
-                if(email == person.value(forKey: "email") as! String && password == person.value(forKey: "password") as! String){
+        let res = dbManager.getUserWithEmail(email: email)
+        for person in res {
+            if(email == person.value(forKey: "email") as! String && password==person.value(forKey: "password") as! String){
                     isUserFlag = true
                     break
                 }
                 
             }
-        } catch {
-            print("Could not auth")
-        }
         return isUserFlag
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

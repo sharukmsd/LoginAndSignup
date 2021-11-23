@@ -27,8 +27,9 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
     var activeTextField : UITextField? = nil
     private var datePicker: UIDatePicker!
     var person: Person?
-    var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     let validationManager = ValidationManager()
+    let dbManager = DatabaseManager()
 
     fileprivate func setDelegates() {
         txtFullName.delegate = self
@@ -150,9 +151,23 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
         if(validationManager.isValidEmail(email: email!)){
             emailErrLabel.isHidden = true
         }else{
-            emailErrLabel.text = "Please enter a valid email"
+            emailErrLabel.text = "*Please enter a valid email"
             emailErrLabel.isHidden = false
             return;
+        }
+        //Don't show error with its own mail
+        if(email == person?.email){
+            emailErrLabel.isHidden = true
+        }
+        else if(validationManager.isEmailExistAlready(email: email!)){
+            //checks if the email already exist
+            //if does show error
+            
+            emailErrLabel.text = "*Email already exist"
+            emailErrLabel.isHidden = false
+            return
+        }else{
+            emailErrLabel.isHidden = true
         }
         
         //Passwod must be 8 character long
@@ -176,20 +191,10 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
             return;
         }
         
-        
-        person?.fullName = fullName
-        person?.email = email
-        person?.password = password
-        person?.phone = phone
-        person?.dateOfBirth = dateOfBirth
-        
-        do {
-            try context.save()
-            self.navigationController?.popViewController(animated: true)
+        //Save to database
+        dbManager.updateUser(userToUpdate: person!, name: fullName!, email: email!, password: password!, phone: phone!, dateOfBirth: dateOfBirth)
+        self.navigationController?.popViewController(animated: true)
 
-        } catch  {
-            print("Error: Could not update")
-        }
         
     }
     
