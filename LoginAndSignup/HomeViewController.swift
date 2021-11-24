@@ -15,6 +15,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var btnLogout: UIButton!
     
+    var loggedInUserEmail: String!
     let dbManager = DatabaseManager()
 
     var fetchedResultsController: NSFetchedResultsController<Person>!
@@ -30,7 +31,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         myTableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
 
 //        lblName.text = UserDefaults.standard.string(forKey: "loggedInUserEmail")
-//        lblName.isHidden = false
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -55,8 +55,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }else{
             loadTableFromCoreData()
         }
-        
     }
+    override func viewWillAppear(_ animated: Bool) {
+        setName()
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(fetchedResultsController != nil){
@@ -91,6 +94,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if editingStyle == .delete {
             
             let personToDelete = self.fetchedResultsController.object(at: indexPath)
+            if personToDelete.email == loggedInUserEmail{
+                let showErr = UIAlertController(title: "Can't delete", message: "Can't delete logged in user", preferredStyle: UIAlertControllerStyle.alert)
+                
+                showErr.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                
+                present(showErr, animated: true, completion: { return })
+            }
             let confirmDelete = UIAlertController(title: "Confirm deletion", message: "Do you really want to delete \(personToDelete.fullName!)?", preferredStyle: UIAlertControllerStyle.alert)
             
             confirmDelete.addAction(UIAlertAction(title: "Yes", style: .default, handler: {
@@ -113,7 +123,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func logoutBtnTapped(_ sender: Any) {
         //set key to false
         UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
-        UserDefaults.standard.set("", forKey: "loggedInUserEmail")
+        UserDefaults.standard.removeObject(forKey: "loggedInUserEmail")
         UserDefaults.standard.synchronize()
         
         // present the login screen
@@ -128,6 +138,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                     self.myTableView.reloadData()
         },
                                   completion: nil);
+    }
+    private func setName(){
+        loggedInUserEmail = UserDefaults.standard.string(forKey: "loggedInUserEmail")
+        let res = dbManager.getUserWithEmail(email: loggedInUserEmail!)
+        for person in res{
+            lblName.text = (person.value(forKey: "fullName") as! String)
+            print(lblName.text!)
+        }
     }
 }
 

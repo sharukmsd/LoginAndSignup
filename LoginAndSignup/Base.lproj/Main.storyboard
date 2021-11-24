@@ -35,25 +35,25 @@
                                 <rect key="frame" x="0.0" y="70" width="375" height="553"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ild-OI-ovw">
-                                <rect key="frame" x="20" y="30" width="260" height="30"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHH-57-Y45">
+                                <rect key="frame" x="16" y="30" width="258" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.086274509799999996" green="0.086274509799999996" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="pQV-u8-ga0" firstAttribute="leading" secondItem="ild-OI-ovw" secondAttribute="trailing" constant="10" id="0bK-hh-ddq"/>
-                            <constraint firstItem="ild-OI-ovw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="7vK-hN-UUU"/>
-                            <constraint firstItem="ZAJ-px-WsM" firstAttribute="top" secondItem="ild-OI-ovw" secondAttribute="bottom" constant="10" id="AkS-3L-uWq"/>
+                            <constraint firstItem="pQV-u8-ga0" firstAttribute="leading" secondItem="YHH-57-Y45" secondAttribute="trailing" constant="16" id="HGV-s4-BNd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZAJ-px-WsM" secondAttribute="trailing" id="NyC-V6-Dz1"/>
                             <constraint firstItem="ZAJ-px-WsM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="TRF-Ss-goM"/>
                             <constraint firstItem="pQV-u8-ga0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="UpL-FI-nY3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ZAJ-px-WsM" secondAttribute="bottom" id="YtC-Au-bAG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pQV-u8-ga0" secondAttribute="trailing" constant="20" id="hkI-Yw-3FB"/>
                             <constraint firstItem="ZAJ-px-WsM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kia-lJ-SoB"/>
-                            <constraint firstItem="ild-OI-ovw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="vbN-9H-9rA"/>
+                            <constraint firstItem="ZAJ-px-WsM" firstAttribute="top" secondItem="YHH-57-Y45" secondAttribute="bottom" constant="10" id="kza-rW-UbV"/>
+                            <constraint firstItem="YHH-57-Y45" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="tO2-bF-9r1"/>
+                            <constraint firstItem="YHH-57-Y45" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ySJ-Oc-QH0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -62,7 +62,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnLogout" destination="pQV-u8-ga0" id="75Q-EZ-61H"/>
-                        <outlet property="lblName" destination="ild-OI-ovw" id="Jx1-ER-ZKt"/>
+                        <outlet property="lblName" destination="YHH-57-Y45" id="ASO-36-c4j"/>
                         <outlet property="myTableView" destination="ZAJ-px-WsM" id="eLX-Vs-yA2"/>
                         <segue destination="vE1-wy-pfW" kind="presentation" identifier="loginView" id="Grf-rP-Mlq"/>
                     </connections>
