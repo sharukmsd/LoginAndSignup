@@ -57,6 +57,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     override func viewWillAppear(_ animated: Bool) {
+//        dbManager = DatabaseManager()
         setName()
     }
     
@@ -141,10 +142,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     private func setName(){
         loggedInUserEmail = UserDefaults.standard.string(forKey: "loggedInUserEmail")
+        if loggedInUserEmail != nil{
         let res = dbManager.getUserWithEmail(email: loggedInUserEmail!)
         for person in res{
             lblName.text = (person.value(forKey: "fullName") as! String)
             print(lblName.text!)
+            }
+            
         }
     }
 }

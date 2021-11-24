@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LoginAndSignup/HomeViewController.swift"
-            timestampString = "659470401.17111"
+            timestampString = "659470999.215327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "logoutBtnTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
