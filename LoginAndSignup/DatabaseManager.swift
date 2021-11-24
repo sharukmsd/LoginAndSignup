@@ -15,7 +15,7 @@ class DatabaseManager{
 
     
     //Create
-    func createNewUser(fName:String, email:String, password:String, phone: String, dateOfBirth: Date) -> Bool {
+    func createNewUser(fName:String, email:String, password:String, phone: String, dateOfBirth: Date, image: UIImage) -> Bool {
         let newPerson = Person(context: context)
         
         newPerson.fullName = fName
@@ -23,7 +23,8 @@ class DatabaseManager{
         newPerson.password = password
         newPerson.phone = phone
         newPerson.dateOfBirth = dateOfBirth as NSDate
-        
+        newPerson.image = (UIImagePNGRepresentation(image)! as NSData)
+
         do{
             try context.save()
             print ("Saved")
@@ -70,13 +71,14 @@ class DatabaseManager{
     }
     
     //Update
-    func updateUser(userToUpdate: Person, name:String, email:String, password:String, phone: String, dateOfBirth: NSDate) -> Void {
+    func updateUser(userToUpdate: Person, name:String, email:String, password:String, phone: String, dateOfBirth: NSDate, image: UIImage) -> Void {
         userToUpdate.fullName = name
         userToUpdate.email = email
         userToUpdate.password = password
         userToUpdate.phone = phone
         userToUpdate.dateOfBirth = dateOfBirth
-        
+        userToUpdate.image = (UIImagePNGRepresentation(image)! as NSData)
+
         do {
             try context.save()
         } catch  {

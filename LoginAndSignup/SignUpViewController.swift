@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SignUpViewController: UIViewController, UITextFieldDelegate {
+class SignUpViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var fNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -18,6 +18,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var goButton: UIButton!
+    @IBOutlet weak var imgProfile: UIImageView!
     
     //Labels used to show invalid input
     @IBOutlet weak var fNameErrLabel: UILabel!
@@ -195,7 +196,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
 
         //Store data
-        let isStored = dbManager.createNewUser(fName: fullName!, email: email!, password: password!, phone: phone!, dateOfBirth: dateOfBirth)
+        let isStored = dbManager.createNewUser(fName: fullName!, email: email!, password: password!, phone: phone!, dateOfBirth: dateOfBirth, image: imgProfile.image!)
         if isStored{
             self.dismiss(animated: true, completion: nil)
         }
@@ -206,6 +207,20 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         //On tapping the login
         // Dissmiss itself
         self.dismiss(animated: true, completion: nil)
+    }
+    @IBOutlet weak var btnChoseTapped: UIButton!
+    @IBAction func btnChooseTapped(_ sender: Any) {
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        
+        present(picker, animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
+        
+        imgProfile.image = image
+        dismiss(animated: true)
     }
     
     fileprivate func setRadius() {

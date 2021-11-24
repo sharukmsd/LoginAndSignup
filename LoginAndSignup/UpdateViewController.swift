@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class UpdateViewController: UIViewController, UITextFieldDelegate {
+class UpdateViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
     @IBOutlet weak var txtFullName: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
@@ -17,6 +17,7 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var txtPhone: UITextField!
     @IBOutlet weak var txtDateOfBirth: UITextField!
     @IBOutlet weak var btnUpdate: UIButton!
+    @IBOutlet weak var myImage: UIImageView!
     
     @IBOutlet weak var fNameErrLabel: UILabel!
     @IBOutlet weak var emailErrLabel: UILabel!
@@ -59,6 +60,9 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
         
         setUpDatePicker()
         
+        myImage.layer.cornerRadius = myImage.frame.height/2
+
+        myImage.image = UIImage(data: person?.image as! Data)
         txtFullName.text = person?.fullName
         txtEmail.text = person?.email
         txtPassword.text = person?.password
@@ -66,6 +70,7 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         txtDateOfBirth.text = dateFormatter.string(from: person?.dateOfBirth as! Date)
+        
         // Do any additional setup after loading the view.
     }
     func initializeHideKeyboard() {
@@ -192,10 +197,24 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
         }
         
         //Save to database
-        dbManager.updateUser(userToUpdate: person!, name: fullName!, email: email!, password: password!, phone: phone!, dateOfBirth: dateOfBirth)
+        dbManager.updateUser(userToUpdate: person!, name: fullName!, email: email!, password: password!, phone: phone!, dateOfBirth: dateOfBirth, image: myImage.image!)
         self.navigationController?.popViewController(animated: true)
 
         
+    }
+
+    @IBAction func btnChangeTapped(_ sender: Any) {
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        
+        present(picker, animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
+        
+        myImage.image = image
+        dismiss(animated: true)
     }
     
 }

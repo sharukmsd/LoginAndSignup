@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E075518274E190A00DF8AEF /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E075516274E190A00DF8AEF /* TableViewCell.swift */; };
+		2E075519274E190A00DF8AEF /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E075517274E190A00DF8AEF /* TableViewCell.xib */; };
 		2E15F10F27386FF3009ECFBC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E15F10E27386FF3009ECFBC /* SignUpViewController.swift */; };
 		2E15F1112738730E009ECFBC /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E15F1102738730E009ECFBC /* LogInViewController.swift */; };
 		2E3EFFA3274A713800C65E36 /* UpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EFFA2274A713800C65E36 /* UpdateViewController.swift */; };
@@ -18,12 +20,14 @@
 		2E9FC492274D18B2007FE268 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9FC491274D18B2007FE268 /* ForgetPasswordViewController.swift */; };
 		2E9FC494274D6A8E007FE268 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9FC493274D6A8E007FE268 /* DatabaseManager.swift */; };
 		2ED3B63627465869007E5CAA /* AuthModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2ED3B63427465869007E5CAA /* AuthModel.xcdatamodeld */; };
-		2ED3B63927465DC1007E5CAA /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED3B63727465DC1007E5CAA /* Person+CoreDataClass.swift */; };
-		2ED3B63A27465DC1007E5CAA /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED3B63827465DC1007E5CAA /* Person+CoreDataProperties.swift */; };
+		2ED5688A274E09F6000D8AF8 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED56888274E09F6000D8AF8 /* Person+CoreDataClass.swift */; };
+		2ED5688B274E09F6000D8AF8 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED56889274E09F6000D8AF8 /* Person+CoreDataProperties.swift */; };
 		2EE74743274B885D00C21C43 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE74742274B885D00C21C43 /* ValidationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E075516274E190A00DF8AEF /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		2E075517274E190A00DF8AEF /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		2E15F10E27386FF3009ECFBC /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		2E15F1102738730E009ECFBC /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		2E3EFFA2274A713800C65E36 /* UpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateViewController.swift; sourceTree = "<group>"; };
@@ -37,8 +41,8 @@
 		2E9FC491274D18B2007FE268 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		2E9FC493274D6A8E007FE268 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		2ED3B63527465869007E5CAA /* AuthModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AuthModel.xcdatamodel; sourceTree = "<group>"; };
-		2ED3B63727465DC1007E5CAA /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
-		2ED3B63827465DC1007E5CAA /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2ED56888274E09F6000D8AF8 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2ED56889274E09F6000D8AF8 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2EE74742274B885D00C21C43 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,8 +76,8 @@
 		2E98B51B27384F73006A9ADC /* LoginAndSignup */ = {
 			isa = PBXGroup;
 			children = (
-				2ED3B63727465DC1007E5CAA /* Person+CoreDataClass.swift */,
-				2ED3B63827465DC1007E5CAA /* Person+CoreDataProperties.swift */,
+				2ED56888274E09F6000D8AF8 /* Person+CoreDataClass.swift */,
+				2ED56889274E09F6000D8AF8 /* Person+CoreDataProperties.swift */,
 				2EF24FCB2746344B00F03F53 /* Person */,
 				2E98B51C27384F73006A9ADC /* AppDelegate.swift */,
 				2E98B51E27384F73006A9ADC /* HomeViewController.swift */,
@@ -88,6 +92,8 @@
 				2E98B52527384F73006A9ADC /* LaunchScreen.storyboard */,
 				2E98B52827384F73006A9ADC /* Info.plist */,
 				2ED3B63427465869007E5CAA /* AuthModel.xcdatamodeld */,
+				2E075516274E190A00DF8AEF /* TableViewCell.swift */,
+				2E075517274E190A00DF8AEF /* TableViewCell.xib */,
 			);
 			path = LoginAndSignup;
 			sourceTree = "<group>";
@@ -159,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E98B52727384F73006A9ADC /* LaunchScreen.storyboard in Resources */,
+				2E075519274E190A00DF8AEF /* TableViewCell.xib in Resources */,
 				2E98B52427384F73006A9ADC /* Assets.xcassets in Resources */,
 				2E98B52227384F73006A9ADC /* Main.storyboard in Resources */,
 			);
@@ -171,17 +178,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2ED3B63A27465DC1007E5CAA /* Person+CoreDataProperties.swift in Sources */,
+				2E075518274E190A00DF8AEF /* TableViewCell.swift in Sources */,
 				2E9FC494274D6A8E007FE268 /* DatabaseManager.swift in Sources */,
 				2E15F1112738730E009ECFBC /* LogInViewController.swift in Sources */,
+				2ED5688A274E09F6000D8AF8 /* Person+CoreDataClass.swift in Sources */,
 				2E9FC492274D18B2007FE268 /* ForgetPasswordViewController.swift in Sources */,
 				2E3EFFA3274A713800C65E36 /* UpdateViewController.swift in Sources */,
 				2EE74743274B885D00C21C43 /* ValidationManager.swift in Sources */,
 				2E15F10F27386FF3009ECFBC /* SignUpViewController.swift in Sources */,
-				2ED3B63927465DC1007E5CAA /* Person+CoreDataClass.swift in Sources */,
 				2ED3B63627465869007E5CAA /* AuthModel.xcdatamodeld in Sources */,
 				2E98B51F27384F73006A9ADC /* HomeViewController.swift in Sources */,
 				2E98B51D27384F73006A9ADC /* AppDelegate.swift in Sources */,
+				2ED5688B274E09F6000D8AF8 /* Person+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

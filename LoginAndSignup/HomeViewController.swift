@@ -27,6 +27,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         myTableView.delegate = self
         
         btnLogout.layer.cornerRadius = CGFloat(7.5)
+        myTableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
 
 //        lblName.text = UserDefaults.standard.string(forKey: "loggedInUserEmail")
 //        lblName.isHidden = false
@@ -67,9 +68,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = myTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = myTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         let person: Person = fetchedResultsController.object(at: indexPath)
-        cell.textLabel?.text = person.fullName
+        cell.cellLabel.text = person.fullName
+        cell.cellImage.image = UIImage(data: person.image as! Data)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

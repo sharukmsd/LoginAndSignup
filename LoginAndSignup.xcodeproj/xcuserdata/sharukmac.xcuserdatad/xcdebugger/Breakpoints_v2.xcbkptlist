@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LoginAndSignup/SignUpViewController.swift"
-            timestampString = "659392469.409706"
+            filePath = "LoginAndSignup/DatabaseManager.swift"
+            timestampString = "659444037.710307"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "loginTapped(_:)"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "createNewUser(fName:email:password:phone:dateOfBirth:image:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
